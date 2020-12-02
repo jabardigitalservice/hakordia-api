@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\SignatureStatus;
+use App\Enums\SignatureType;
 use App\Models\Signature;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +24,11 @@ class SignatureFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'type' => SignatureType::PIMPINAN(),
+            'occupation_name' => 'Kepala Dinas Kominfo',
+            'content' => $this->faker->text,
+            'status' => SignatureStatus::PUBLISHED(),
         ];
     }
 }
