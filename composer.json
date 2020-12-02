@@ -50,6 +50,15 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "docker-build": [
+            "docker build -t asia.gcr.io/sapawarga-app/hakordia/api:$(git rev-parse --short HEAD) ."
+        ],
+        "docker-push": [
+            "docker push asia.gcr.io/sapawarga-app/hakordia/api:$(git rev-parse --short HEAD)"
+        ],
+        "cloud-deploy": [
+            "gcloud run deploy hakordia-api --image=asia.gcr.io/sapawarga-app/hakordia/api:$(git rev-parse --short HEAD)"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
