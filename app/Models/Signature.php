@@ -17,7 +17,7 @@ class Signature extends Model
     ];
 
     protected $casts = [
-        'type' => SignatureType::class.':nullable',
-        'status' => SignatureStatus::class.':nullable',
+        'type' => SignatureType::class,
+        'status' => SignatureStatus::class,
     ];
 }

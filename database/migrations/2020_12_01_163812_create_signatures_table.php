@@ -17,8 +17,8 @@ class CreateSignaturesTable extends Migration
             $table->id();
             $table->string('name')->index();
             $table->string('type')->index();
-            $table->string('occupation_name');
-            $table->string('content');
+            $table->string('occupation_name')->nullable();
+            $table->text('content')->nullable();
             $table->string('signature_path')->nullable();
             $table->string('status')->index();
             $table->softDeletes();
