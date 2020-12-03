@@ -28,6 +28,7 @@ class SignatureFactory extends Factory
             'type' => SignatureType::PIMPINAN(),
             'occupation_name' => 'Kepala Dinas Kominfo',
             'content' => $this->faker->text,
+            'signature_path' => 'ttd-example.png',
             'status' => SignatureStatus::PUBLISHED(),
         ];
     }

@@ -170,6 +170,7 @@ return [
         Fruitcake\Cors\CorsServiceProvider::class,
         CleancodeId\LaravelJwtGuard\LaravelJwtGuardServiceProvider::class,
         Spatie\Enum\Laravel\EnumServiceProvider::class,
+        Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
 
         /*
          * Application Service Providers...
