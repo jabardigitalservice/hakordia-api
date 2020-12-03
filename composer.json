@@ -60,6 +60,11 @@
         "cloud-deploy": [
             "gcloud run deploy hakordia-api --image=asia.gcr.io/sapawarga-app/hakordia/api:$(git rev-parse --short HEAD)"
         ],
+        "build-deploy": [
+            "docker build -t asia.gcr.io/sapawarga-app/hakordia/api:$(git rev-parse --short HEAD) .",
+            "docker push asia.gcr.io/sapawarga-app/hakordia/api:$(git rev-parse --short HEAD)",
+            "gcloud run deploy hakordia-api --image=asia.gcr.io/sapawarga-app/hakordia/api:$(git rev-parse --short HEAD)"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
