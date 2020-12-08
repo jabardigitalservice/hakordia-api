@@ -24,7 +24,7 @@ class SignatureFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'first_name' => $this->faker->name,
             'email' => $this->faker->email,
             'phone_number' => '085729402679',
             'type' => SignatureType::PIMPINAN(),

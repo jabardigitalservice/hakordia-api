@@ -17,7 +17,7 @@ class Signature extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name', 'phone_number', 'email',
+        'first_name', 'last_name', 'phone_number', 'email',
         'content', 'occupation_name', 'workplace_name', 'signature_path'
     ];
 

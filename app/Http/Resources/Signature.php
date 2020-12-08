@@ -21,7 +21,8 @@ class Signature extends JsonResource
         return [
             'id' => Hashids::encode($this->id),
             'type' => $this->type,
-            'name' => $this->name,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
             'occupation_name' => $this->occupation_name,
             'workplace_name' => $this->workplace_name,
             'content' => $this->content,

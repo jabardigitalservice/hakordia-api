@@ -24,7 +24,8 @@ class SignatureRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'max:150'],
+            'first_name' => ['required', 'max:150'],
+            'last_name' => ['max:150'],
             'occupation_name' => ['required', 'max:150'],
             'signature' => ['required'],
             'content' => ['required', 'max:3000'],
