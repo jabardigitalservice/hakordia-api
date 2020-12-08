@@ -24,6 +24,7 @@ class CreateSignaturesTable extends Migration
             $table->string('workplace_name')->nullable();
             $table->text('content')->nullable();
             $table->string('signature_path')->nullable();
+            $table->unsignedInteger('sequence')->index()->nullable();
             $table->string('status')->index();
             $table->softDeletes();
             $table->timestamps();
