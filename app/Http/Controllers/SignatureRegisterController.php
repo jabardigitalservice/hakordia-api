@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Enums\SignatureStatus;
 use App\Enums\SignatureType;
+use App\Http\Requests\SignatureRegisterRequest;
 use App\Http\Resources\Signature as SignatureResource;
 use App\Models\Signature;
-use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
 class SignatureRegisterController extends Controller
@@ -14,10 +14,10 @@ class SignatureRegisterController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\SignatureRegisterRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(SignatureRegisterRequest $request)
     {
         $signatureImageBase = $request->input('signature');
 
