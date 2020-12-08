@@ -21,6 +21,10 @@ class SignatureListController extends Controller
 
         $records->where('status', SignatureStatus::PUBLISHED());
 
+        if ($request->filled('type')) {
+            $records->where('type', $request->input('type'));
+        }
+
         $records->latest();
 
         return SignatureResource::collection($records->paginate());
