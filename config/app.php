@@ -171,6 +171,7 @@ return [
         CleancodeId\LaravelJwtGuard\LaravelJwtGuardServiceProvider::class,
         Spatie\Enum\Laravel\EnumServiceProvider::class,
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class,
 
         /*
          * Application Service Providers...

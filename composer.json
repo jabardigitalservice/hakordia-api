@@ -15,7 +15,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
         "spatie/laravel-enum": "^2.2",
-        "superbalist/laravel-google-cloud-storage": "^2.2"
+        "superbalist/laravel-google-cloud-storage": "^2.2",
+        "vinkla/hashids": "^9.1"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",

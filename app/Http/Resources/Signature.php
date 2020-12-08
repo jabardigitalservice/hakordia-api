@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
+use Vinkla\Hashids\Facades\Hashids;
 
 class Signature extends JsonResource
 {
@@ -18,7 +19,7 @@ class Signature extends JsonResource
         $disk = Storage::cloud();
 
         return [
-            'id' => $this->id,
+            'id' => Hashids::encode($this->id),
             'name' => $this->name,
             'occupation_name' => $this->occupation_name,
             'content' => $this->content,
