@@ -22,6 +22,7 @@ class Signature extends JsonResource
             'id' => Hashids::encode($this->id),
             'name' => $this->name,
             'occupation_name' => $this->occupation_name,
+            'workplace_name' => $this->workplace_name,
             'content' => $this->content,
             'signature_url' => $disk->url('gen/'.$this->signature_path),
         ];

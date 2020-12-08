@@ -172,6 +172,7 @@ return [
         Spatie\Enum\Laravel\EnumServiceProvider::class,
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
