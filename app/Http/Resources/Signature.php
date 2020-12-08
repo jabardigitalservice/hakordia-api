@@ -25,6 +25,7 @@ class Signature extends JsonResource
             'workplace_name' => $this->workplace_name,
             'content' => $this->content,
             'signature_url' => $disk->url('gen/'.$this->signature_path),
+            'created_at' => $this->created_at,
         ];
     }
 }
