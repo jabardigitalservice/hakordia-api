@@ -53,7 +53,7 @@ class SignatureRegisterController extends Controller
     protected function saveCompositeImage(\Intervention\Image\Image $signatureImageBaseInstance, $fileName): void
     {
         $canvasInstance = Image::canvas(925, 270);
-        $canvasInstance->fill('#fbfbfb');
+        // $canvasInstance->fill('#fbfbfb');
 
         $handVectorInstance = Image::make(storage_path('app/vector/Kiri_Merah.png'));
         $handVectorInstance->rotate('45');
