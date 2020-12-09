@@ -7,6 +7,7 @@ use App\Enums\SignatureType;
 use App\Http\Requests\SignatureRegisterRequest;
 use App\Http\Resources\Signature as SignatureResource;
 use App\Models\Signature;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Vinkla\Hashids\Facades\Hashids;
@@ -65,11 +66,17 @@ class SignatureRegisterController extends Controller
         $canvasInstance = Image::canvas(925, 270);
         // $canvasInstance->fill('#fbfbfb');
 
-        $handVectorInstance = Image::make(storage_path('app/vector/Kiri_Merah.png'));
-        $handVectorInstance->rotate('45');
+        $handVectorsFiles = array_diff(scandir(storage_path('app/vector/')), array('.', '..'));
+        $handVectorsSelected = Arr::random($handVectorsFiles);
+
+        $handVectorInstance = Image::make(storage_path("app/vector/{$handVectorsSelected}"));
+        $handVectorInstance->rotate(rand(-45, 45));
 
         $canvasInstance->insert($handVectorInstance, 'center');
         $canvasInstance->insert($signatureImageBaseInstance);
+
+        // header('Content-Type: image/png');
+        // echo $canvasInstance->encode('png', 100);
 
         $disk = Storage::cloud();
 
