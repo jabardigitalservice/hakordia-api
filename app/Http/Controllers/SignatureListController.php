@@ -25,6 +25,10 @@ class SignatureListController extends Controller
             $records->where('type', $request->input('type'));
         }
 
+        if ($request->filled('search')) {
+            $records->where('first_name', 'like', "%{$request->input('search')}%");
+        }
+
         $records->latest();
 
         return SignatureResource::collection($records->paginate());
