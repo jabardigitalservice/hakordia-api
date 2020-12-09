@@ -13,7 +13,7 @@ class SignatureListController extends Controller
      * Handle the incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection|\Illuminate\Http\Response
      */
     public function __invoke(Request $request)
     {
@@ -29,7 +29,10 @@ class SignatureListController extends Controller
             $records->where('first_name', 'like', "%{$request->input('search')}%");
         }
 
-        $records->latest();
+        $orderBy = $request->input('order_by', 'created_at');
+        $orderDirection = $request->input('order_dir', 'desc');
+
+        $records->orderBy($orderBy, $orderDirection);
 
         return SignatureResource::collection($records->paginate());
     }
