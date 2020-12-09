@@ -23,6 +23,7 @@ class SignatureRegisterController extends Controller
     {
         $signature = new Signature();
         $signature->fill($request->all());
+        $signature->sequence = 1000;
         $signature->type = SignatureType::PUBLIC();
         $signature->status = SignatureStatus::PUBLISHED();
         $signature->save();

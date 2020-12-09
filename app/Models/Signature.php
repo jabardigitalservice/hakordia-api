@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \App\Enums\SignatureType $type
  * @property \App\Enums\SignatureStatus $status
  * @property string $signature_path
+ * @property integer $sequence
  */
 class Signature extends Model
 {

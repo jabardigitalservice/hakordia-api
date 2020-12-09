@@ -58,6 +58,7 @@ class SignatureFactory extends Factory
             // 'workplace_name' => 'Provinsi Jawa Barat',
             'content' => $this->faker->text,
             'signature_path' => 'ttd-example.png',
+            'sequence' => 1000,
             'status' => SignatureStatus::PUBLISHED(),
         ];
     }
