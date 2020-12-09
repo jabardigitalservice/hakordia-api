@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HealthCheckController;
+use App\Http\Controllers\SignatureDetailController;
 use App\Http\Controllers\SignatureListController;
 use App\Http\Controllers\SignatureRegisterController;
 use App\Http\Controllers\SignatureStatsController;
@@ -22,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HealthCheckController::class);
 Route::get('signatures', SignatureListController::class);
 Route::post('signatures', SignatureRegisterController::class);
+Route::get('signatures/{signature}', SignatureDetailController::class);
+
 Route::get('signatures/stats', SignatureStatsController::class);
 
 Route::middleware('auth:api')->get('/user', UserProfileController::class);

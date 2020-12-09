@@ -7,6 +7,7 @@ use App\Enums\SignatureType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Vinkla\Hashids\Facades\Hashids;
 
 /**
  * @property \App\Enums\SignatureType $type
@@ -27,4 +28,15 @@ class Signature extends Model
         'type' => SignatureType::class,
         'status' => SignatureStatus::class,
     ];
+
+    public function resolveRouteBinding($value, $field = null)
+    {
+        $decodedId = Hashids::decode($value);
+
+        if (count($decodedId) === 0) {
+            return false;
+        }
+
+        return $this->where('id', $decodedId)->firstOrFail();
+    }
 }
