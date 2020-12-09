@@ -27,6 +27,10 @@ class SignatureRegisterController extends Controller
         $signature->status = SignatureStatus::PUBLISHED();
         $signature->save();
 
+        if ($request->filled('signature') === false) {
+            return new SignatureResource($signature);
+        }
+
         $fileName = Hashids::encode($signature->id) . '.png';
 
         $this->saveSignature($request->input('signature'), $fileName);
