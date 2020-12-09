@@ -26,9 +26,9 @@ class SignatureRegisterRequest extends FormRequest
         return [
             'first_name' => ['required', 'max:150'],
             'last_name' => ['max:150'],
-            'occupation_name' => ['required', 'max:150'],
-            'signature' => ['required'],
-            'content' => ['required', 'max:3000'],
+            'occupation_name' => ['max:150'],
+            // 'signature' => ['required'],
+            'content' => ['max:3000'],
         ];
     }
 }
