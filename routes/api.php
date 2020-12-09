@@ -23,8 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HealthCheckController::class);
 Route::get('signatures', SignatureListController::class);
 Route::post('signatures', SignatureRegisterController::class);
-Route::get('signatures/{signature}', SignatureDetailController::class);
-
 Route::get('signatures/stats', SignatureStatsController::class);
+Route::get('signatures/{signature}', SignatureDetailController::class);
 
 Route::middleware('auth:api')->get('/user', UserProfileController::class);
