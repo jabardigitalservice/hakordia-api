@@ -25,14 +25,37 @@ class SignatureFactory extends Factory
     public function definition()
     {
         $typesArray = SignatureType::toArray();
+        $type = Arr::random($typesArray);
+
+        $occupationName = null;
+
+        if ($type === SignatureType::PIMPINAN()->value) {
+            $occupationName = 'Pimpinan Provinsi Jawa Barat';
+        }
+
+        if ($type === SignatureType::PIMPINAN_OPD()->value) {
+            $occupationName = 'Kepala Dinas Provinsi Jawa Barat';
+        }
+
+        if ($type === SignatureType::INSPEKTORAT()->value) {
+            $occupationName = 'Inspektorat Provinsi Jawa Barat';
+        }
+
+        if ($type === SignatureType::WALIKOTA()->value) {
+            $occupationName = 'Walikota Kota Jawa Barat';
+        }
+
+        if ($type === SignatureType::PUBLIC()->value) {
+            $occupationName = 'Masyarakat Umum';
+        }
 
         return [
             'first_name' => $this->faker->name,
             'email' => $this->faker->email,
             'phone_number' => '085729402679',
-            'type' => Arr::random($typesArray),
-            'occupation_name' => 'Kepala Dinas',
-            'workplace_name' => 'Provinsi Jawa Barat',
+            'type' => $type,
+            'occupation_name' => $occupationName,
+            // 'workplace_name' => 'Provinsi Jawa Barat',
             'content' => $this->faker->text,
             'signature_path' => 'ttd-example.png',
             'status' => SignatureStatus::PUBLISHED(),

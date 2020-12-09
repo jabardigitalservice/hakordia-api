@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Signature::factory()
-            ->times(1000)
+            ->times(10000)
             ->create();
     }
 }
