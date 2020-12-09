@@ -29,16 +29,21 @@ class SignatureRegisterController extends Controller
 
         $fileName = Hashids::encode($signature->id) . '.png';
 
-        $signatureImageBase = $request->input('signature');
-        $signatureImageBaseInstance = Image::make($signatureImageBase);
-
-        $this->saveOriginalSignature($signatureImageBaseInstance, $fileName);
-        $this->saveCompositeImage($signatureImageBaseInstance, $fileName);
+        $this->saveSignature($request->input('signature'), $fileName);
 
         $signature->signature_path = $fileName;
         $signature->save();
 
         return new SignatureResource($signature);
+    }
+
+    protected function saveSignature($imageBase64, $fileName): void
+    {
+        $signatureImageBase = $imageBase64;
+        $signatureImageBaseInstance = Image::make($signatureImageBase);
+
+        $this->saveOriginalSignature($signatureImageBaseInstance, $fileName);
+        $this->saveCompositeImage($signatureImageBaseInstance, $fileName);
     }
 
     protected function saveOriginalSignature(\Intervention\Image\Image $canvasSignatureInstance, $fileName): void
