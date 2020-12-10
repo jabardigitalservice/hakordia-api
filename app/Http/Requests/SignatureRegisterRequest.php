@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\RecaptchaRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SignatureRegisterRequest extends FormRequest
@@ -24,6 +25,7 @@ class SignatureRegisterRequest extends FormRequest
     public function rules()
     {
         return [
+            'g-recaptcha-response' => ['required', new RecaptchaRule()],
             'first_name' => ['required', 'max:150'],
             'last_name' => ['max:150'],
             'occupation_name' => ['max:150'],
