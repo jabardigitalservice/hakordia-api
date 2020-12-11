@@ -26,7 +26,10 @@ class SignatureListController extends Controller
         }
 
         if ($request->filled('search')) {
-            $records->where('first_name', 'like', "%{$request->input('search')}%");
+            $records->where(function ($query) use ($request) {
+                $query->where('first_name', 'like', "%{$request->input('search')}%")
+                    ->orWhere('last_name', 'like', "%{$request->input('search')}%");
+            });
         }
 
         $orderBy = $request->input('order_by', 'created_at');
