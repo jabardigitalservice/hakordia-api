@@ -22,7 +22,10 @@ class SignatureListController extends Controller
         $records->where('status', SignatureStatus::PUBLISHED());
 
         if ($request->filled('type')) {
-            $records->where('type', $request->input('type'));
+            $type = $request->input('type');
+            $explodeType = explode(',', $type);
+
+            $records->whereIn('type', $explodeType);
         }
 
         if ($request->filled('search')) {
