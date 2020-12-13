@@ -9,6 +9,7 @@ use App\Http\Resources\Signature as SignatureResource;
 use App\Models\Signature;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -22,10 +23,12 @@ class SignatureRegisterController extends Controller
      */
     public function __invoke(SignatureRegisterRequest $request)
     {
+        $token = $request->input('token');
+
         $signature = new Signature();
         $signature->fill($request->all());
-        $signature->sequence = 1000;
-        $signature->type = SignatureType::PUBLIC();
+        $signature->sequence = $this->getSequence($token);
+        $signature->type = $this->getSignatureType($token);
         $signature->status = SignatureStatus::PUBLISHED();
         $signature->save();
 
@@ -83,5 +86,29 @@ class SignatureRegisterController extends Controller
         $filePath = "gen/{$fileName}";
 
         $disk->put($filePath, $canvasInstance->encode('png', 100));
+    }
+
+    protected function getSignatureType($inputToken)
+    {
+        $prefixes = config('signatures.prefix');
+
+        foreach ($prefixes as $key => $prefix) {
+            if (Str::startsWith($inputToken, $prefix)) {
+                return SignatureType::make($key);
+            }
+        }
+
+        return SignatureType::PUBLIC();
+    }
+
+    protected function getSequence($inputToken): int
+    {
+        preg_match('/^([A-Z_]+)(\d+)$/',$inputToken, $matches);
+
+        if (count($matches) <> 3) {
+            return 1000;
+        }
+
+        return (int) $matches[2];
     }
 }

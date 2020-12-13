@@ -17,7 +17,7 @@ class CreateSignaturesTable extends Migration
             $table->id();
             $table->string('first_name')->index();
             $table->string('last_name')->index()->nullable();
-            $table->string('type')->index();
+            $table->string('type')->index()->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
             $table->string('occupation_name')->nullable();
