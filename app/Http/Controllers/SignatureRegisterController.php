@@ -77,10 +77,7 @@ class SignatureRegisterController extends Controller
         $handVectorInstance->rotate(rand(-45, 45));
 
         $canvasInstance->insert($handVectorInstance, 'center');
-        $canvasInstance->insert($signatureImageBaseInstance);
-
-        // header('Content-Type: image/png');
-        // echo $canvasInstance->encode('png', 100);
+        $canvasInstance->insert($signatureImageBaseInstance, 'center');
 
         $disk = Storage::cloud();
 
