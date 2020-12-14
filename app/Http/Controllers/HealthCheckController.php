@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class HealthCheckController extends Controller
 {
@@ -15,6 +16,8 @@ class HealthCheckController extends Controller
      */
     public function __invoke(Request $request)
     {
+        Log::info('HEALTHCHECK');
+
         // try to connect DB health check
         $dbConnection = config('database.default');
 

@@ -8,6 +8,7 @@ use App\Http\Requests\SignatureRegisterRequest;
 use App\Http\Resources\Signature as SignatureResource;
 use App\Models\Signature;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -23,6 +24,8 @@ class SignatureRegisterController extends Controller
      */
     public function __invoke(SignatureRegisterRequest $request)
     {
+        Log::info('SIGNATURE_REGISTER_INIT', ['context' => $request->toArray()]);
+
         $token = $request->input('token');
 
         $signature = new Signature();
@@ -39,6 +42,8 @@ class SignatureRegisterController extends Controller
         $signature->signature_path = $fileName;
         $signature->save();
 
+        Log::info('SIGNATURE_REGISTER_SUCCESS', ['context' => $signature->toArray()]);
+
         return new SignatureResource($signature);
     }
 
@@ -46,10 +51,22 @@ class SignatureRegisterController extends Controller
     {
         $signatureImageBase = $imageBase64;
         $signatureImageBaseInstance = Image::make($signatureImageBase);
+
+        $log = sprintf(
+            "SIGNATURE_REGISTER_SAVE_SIGNATURE_ORIGINAL_PROCESS Filename: %s; Width: %s; Height: %s",
+            $fileName,
+            $signatureImageBaseInstance->width(),
+            $signatureImageBaseInstance->height(),
+        );
+
+        Log::info($log);
+
         $signatureImageBaseInstance->heighten(270);
 
         $this->saveOriginalSignature($signatureImageBaseInstance, $fileName);
         $this->saveCompositeImage($signatureImageBaseInstance, $fileName);
+
+        Log::info('SIGNATURE_REGISTER_SAVE_SIGNATURE_SUCCESS');
     }
 
     protected function saveOriginalSignature(\Intervention\Image\Image $canvasSignatureInstance, $fileName): void
@@ -59,6 +76,8 @@ class SignatureRegisterController extends Controller
         $filePath = "signatures/{$fileName}";
 
         $disk->put($filePath, $canvasSignatureInstance->encode('png', 100));
+
+        Log::info('SIGNATURE_REGISTER_SAVE_SIGNATURE_ORIGINAL_SUCCESS');
     }
 
     protected function saveCompositeImage(\Intervention\Image\Image $signatureImageBaseInstance, $fileName): void
@@ -80,6 +99,8 @@ class SignatureRegisterController extends Controller
         $filePath = "gen/{$fileName}";
 
         $disk->put($filePath, $canvasInstance->encode('png', 100));
+
+        Log::info('SIGNATURE_REGISTER_SAVE_SIGNATURE_COMPOSITE_SUCCESS');
     }
 
     protected function getSignatureType($inputToken)
