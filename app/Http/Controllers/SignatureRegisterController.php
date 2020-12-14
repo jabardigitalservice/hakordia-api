@@ -50,6 +50,7 @@ class SignatureRegisterController extends Controller
     {
         $signatureImageBase = $imageBase64;
         $signatureImageBaseInstance = Image::make($signatureImageBase);
+        $signatureImageBaseInstance->heighten(270);
 
         $this->saveOriginalSignature($signatureImageBaseInstance, $fileName);
         $this->saveCompositeImage($signatureImageBaseInstance, $fileName);
