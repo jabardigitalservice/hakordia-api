@@ -173,6 +173,7 @@ return [
         Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Sentry\Laravel\ServiceProvider::class,
 
         /*
          * Application Service Providers...
