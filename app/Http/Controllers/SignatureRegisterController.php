@@ -30,11 +30,12 @@ class SignatureRegisterController extends Controller
         $signature->sequence = $this->getSequence($token);
         $signature->type = $this->getSignatureType($token);
         $signature->status = SignatureStatus::PUBLISHED();
-        $signature->save();
 
-        if ($request->filled('signature') === false) {
-            return new SignatureResource($signature);
-        }
+        // $signature->save();
+
+        // if ($request->filled('signature') === false) {
+        //     return new SignatureResource($signature);
+        // }
 
         $fileName = Hashids::encode($signature->id) . '.png';
 

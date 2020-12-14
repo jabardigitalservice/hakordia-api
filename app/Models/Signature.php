@@ -14,6 +14,7 @@ use Vinkla\Hashids\Facades\Hashids;
  * @property \App\Enums\SignatureStatus $status
  * @property string $signature_path
  * @property integer $sequence
+ * @property integer $id
  */
 class Signature extends Model
 {
