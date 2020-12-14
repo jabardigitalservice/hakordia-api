@@ -32,10 +32,6 @@ class SignatureRegisterController extends Controller
         $signature->status = SignatureStatus::PUBLISHED();
         $signature->save();
 
-//        if ($request->filled('signature') === false) {
-//            return new SignatureResource($signature);
-//        }
-
         $fileName = Hashids::encode($signature->id) . '.png';
 
         $this->saveSignature($request->input('signature'), $fileName);
@@ -70,7 +66,7 @@ class SignatureRegisterController extends Controller
         $canvasInstance = Image::canvas(925, 270);
         // $canvasInstance->fill('#fbfbfb');
 
-        $handVectorsFiles = array_diff(scandir(storage_path('app/vector/')), array('.', '..'));
+        $handVectorsFiles = $this->getListHandVectorFiles();
         $handVectorsSelected = Arr::random($handVectorsFiles);
 
         $handVectorInstance = Image::make(storage_path("app/vector/{$handVectorsSelected}"));
@@ -108,5 +104,21 @@ class SignatureRegisterController extends Controller
         }
 
         return (int) $matches[2];
+    }
+
+    protected function getListHandVectorFiles()
+    {
+        return [
+          'Kanan_Biru.png',
+          'Kanan_Hijau.png',
+          'Kanan_Hitam.png',
+          'Kanan_Merah.png',
+          'Kanan_Orange.png',
+          'Kiri_Biru.png',
+          'Kiri_Hijau.png',
+          'Kiri_Hitam.png',
+          'Kiri_Merah.png',
+          'Kiri_Orange.png',
+        ];
     }
 }
