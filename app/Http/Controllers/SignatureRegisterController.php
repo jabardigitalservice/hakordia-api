@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Intervention\Image\Facades\Image;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -24,6 +25,8 @@ class SignatureRegisterController extends Controller
      */
     public function __invoke(SignatureRegisterRequest $request)
     {
+        return response()->json(['message' => 'Registration closed.'], 422);
+
         Log::info('SIGNATURE_REGISTER_INIT', ['context' => $request->toArray()]);
 
         $token = $request->input('token');
